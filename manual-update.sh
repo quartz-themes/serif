@@ -439,12 +439,13 @@ cd temp
 for i in "${themes[@]}"; do
   echo "Start ${i}"
   # git clone git@github.com:quartz-themes/${i}.git
-  git clone https://github.com/quartz-themes/${i}
+  git clone https://github.com/quartz-themes/${i}.git
   cd ${i}
   # npm install
   # git config pull.rebase >&- || git config pull.rebase false
   git config --local pull.rebase false
-  git config remote.template.url >&- || git remote add template git@github.com:quartz-themes/quartz-themes-preview-template.git
+  # git config remote.template.url >&- || git remote add template git@github.com:quartz-themes/quartz-themes-preview-template.git
+  git config remote.template.url >&- || git remote add template https://github.com/quartz-themes/quartz-themes-preview-template.git
   git pull template v4 -X theirs --no-edit || git pull template v4 -X theirs --allow-unrelated-histories --no-edit
   git pull origin v4 -X theirs --no-edit || git pull origin v4 -X theirs --allow-unrelated-histories --no-edit
   # rm .github/workflows/deploy-preview.yml
